@@ -8,7 +8,6 @@ import {getStore} from './store';
 
 import styles from './styles';
 
-
 const App = () => {
   const store = getStore();
 
