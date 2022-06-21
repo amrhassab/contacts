@@ -20,6 +20,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
   },
+  detailContainer: {
+    paddingHorizontal: '10%',
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  detailText: {
+    textAlign: 'center',
+  },
 });
 
 export default styles;

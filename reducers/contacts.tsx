@@ -1,14 +1,15 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import type {RootState} from '../store';
 import {ContactInterface} from '../src/components/Contact';
 
 // Define a type for the slice state
 interface ContactsState {
   contactsList: ContactInterface[];
+  focusedContact?: ContactInterface;
 }
 
 const initialState: ContactsState = {
   contactsList: [],
+  focusedContact: undefined,
 };
 
 export const contactsSlice = createSlice({
@@ -18,12 +19,15 @@ export const contactsSlice = createSlice({
     addContact: (state, action: PayloadAction<ContactInterface>) => {
       state.contactsList = [...state.contactsList, action.payload];
     },
+    focusContact: (state, action: PayloadAction<ContactInterface>) => {
+      state.focusedContact = action.payload;
+    },
+    clearContact: state => {
+      state.focusedContact = undefined;
+    },
   },
 });
 
-export const {addContact} = contactsSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectContacts = (state: RootState) => state.contacts.contactsList;
+export const {addContact, focusContact, clearContact} = contactsSlice.actions;
 
 export default contactsSlice.reducer;

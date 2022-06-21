@@ -1,15 +1,35 @@
 import React, {useState} from 'react';
-import {Text, ScrollView, View, Button, Pressable} from 'react-native';
+import {Text, ScrollView, View, Button} from 'react-native';
 import Contact from '../../components/Contact';
 import AddContactsModal from '../../components/AddContactModal';
-import {useAppSelector} from '../../../hooks';
+import {useAppSelector, useAppDispatch} from '../../../hooks';
+import {clearContact} from '../../../reducers/contacts';
 import styles from './styles';
+import Details from '../Details';
 
 export interface ContactsInterface {}
 
 const Contacts: React.FC<ContactsInterface> = () => {
-  const contacts = useAppSelector(state => state.contacts.contactsList);
+  const dispatch = useAppDispatch();
+
+  const {contactsList, focusedContact} = useAppSelector(
+    state => state.contacts,
+  );
+
   const [modalVisible, setModalVisible] = useState(false);
+
+  if (focusedContact) {
+    return (
+      <View style={styles.detailContainer}>
+        <Text style={styles.detailText}>{focusedContact.name}</Text>
+        <Text style={styles.detailText}>{focusedContact.email}</Text>
+        {!!focusedContact.mobile && (
+          <Text style={styles.detailText}>{focusedContact.mobile}</Text>
+        )}
+        <Button title="Back" onPress={() => dispatch(clearContact())} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.layout}>
@@ -17,10 +37,11 @@ const Contacts: React.FC<ContactsInterface> = () => {
 
       <ScrollView>
         <View style={styles.container}>
-          {contacts.length ? (
+          {contactsList.length ? (
             <>
-              {contacts.map(contact => (
+              {contactsList.map((contact, i) => (
                 <Contact
+                  key={i}
                   name={contact.name}
                   email={contact.email}
                   mobile={contact.mobile}

@@ -2,10 +2,17 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   contactContainer: {
-    marginTop: '5%',
     paddingHorizontal: '10%',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  contactDetailsContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
+    width: '100%',
   },
   sectionRow: {
     fontSize: 14,
@@ -14,7 +21,7 @@ const styles = StyleSheet.create({
   break: {
     borderBottomColor: 'black',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    marginBottom: '5%',
+    marginBottom: 10,
   },
 });
 
