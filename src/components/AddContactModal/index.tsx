@@ -43,9 +43,7 @@ const AddContactsModal: React.FC<AddContactInterface> = ({
   };
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
     dispatch(addContact(data));
-
     onCancel();
   };
 
